@@ -35,6 +35,12 @@ git pull origin master  如果将origin修改成了 aa 就 git pull aa master ma
 把本地代码提交到远程仓库(需要输入github的账号密码)
 git push origin master
 
+git clone [远程仓库地址] [别名:可以要可以不要,默认为远程仓库名字]
+1.组长或者负责人创建中央仓库
+2.添加成员
+3.成员克隆项目到本地（解决来3个事情不用git init初始化仓库、git remote add 关联远程仓库、git pull拉取到本地）
+4.每个组员写完自己到程序后,基于"git add / git commit "把自己修改到内容存放到历史区，然后通过git pull/git push 本信息和远程仓库信息保持同步即可（可能涉及冲突到处理）
 
 git config --system --unset credential.helper 每次都输入密码
 git config --global credential.helper store 不用每次都输入密码
+
