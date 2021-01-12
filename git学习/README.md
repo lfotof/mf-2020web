@@ -12,10 +12,21 @@ git add . 把当前仓库中所有最新修改提交到暂存区
 git add xxx 把某个文件或者文件夹提交到暂存区
 git add -A 和.上一样的
 //删除缓存区文件
-git rm --cached '"git\345\255\246\344\271\240/README.md' 
+git rm --cached 'git\345\255\246\344\271\240/README.md' 
 //查看状态
 git status 查看当前文件到状态(红色代表在工作区，绿色代表在暂存区，看不见证明所有修改到信息都已经提交到了历史区)
 git commit -m '描述信息'
 //查看历史版本信息(历史记录)
 git log 
-git reflog 包含回滚信息，当进行来回滚不会再显示该条被回滚到历史信息(A,B俩个文件，B进行了回滚就不会再显示B来)
+git reflog 包含回滚信息
+//回滚
+git reset --hard 3f83cdb936aa66f39e4ed5f9b32f0a56490a4ae6 当进行了回滚使用git log 不会再显示该条被回滚到历史信息(A,B俩个文件，B进行了回滚就不会再显示B了)可以使用git reflog查看，然后找到版本信息进行回滚
+
+//本地仓库信息提交到远程仓库
+git remote -v  查看本地仓库和哪些远程仓库保持连接
+git remote add origin [git远程仓库地址] 让本地仓库和远程仓库新建一个origin是随便起的一个连接名（可以改成自己想要到，只不过一般都用这个）
+git remote rm origin 删除关联
+*提交之前一定先拉取
+git pull origin master  如果将origin修改成了 aa 就 git pull aa master master
+把本地代码提交到远程仓库(需要输入github的账号密码)
+git push origin master
