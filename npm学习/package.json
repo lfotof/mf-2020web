@@ -1,0 +1,11 @@
+{
+  "name": "npmtest",
+  "version": "1.0.0",
+  "description": "NPM\r node package manger :NODE模块管理工具 根据NPM我们可快速按装、卸载所需要到资源文件",
+  "main": "1.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
