@@ -7,6 +7,9 @@ git config -l 查看全局配置信息
 git config -global -l 查看全局已经配置到信息
 git config -global user.name 设置全局用户名
 git config -global user.email 设置全局邮箱
+git credential-manager uninstall 清除缓存的用户名和密码
+git config --global user.name "username" 更改全局用户名
+控制面板----用户账户---Windows管理凭据---编辑
 //将文件提交到暂存区
 git add . 把当前仓库中所有最新修改提交到暂存区
 git add xxx 把某个文件或者文件夹提交到暂存区
@@ -30,3 +33,7 @@ git remote rm origin 删除关联
 git pull origin master  如果将origin修改成了 aa 就 git pull aa master master
 把本地代码提交到远程仓库(需要输入github的账号密码)
 git push origin master
+
+
+git config --local --unset credential.helper 每次都输入密码
+git config --global credential.helper cache 不用每次都输入密码
