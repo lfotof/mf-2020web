@@ -35,5 +35,5 @@ git pull origin master  如果将origin修改成了 aa 就 git pull aa master ma
 git push origin master
 
 
-git config --local --unset credential.helper 每次都输入密码
-git config --global credential.helper cache 不用每次都输入密码
+git config --system --unset credential.helper 每次都输入密码
+git config --global credential.helper store 不用每次都输入密码
