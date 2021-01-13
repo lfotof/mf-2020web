@@ -147,16 +147,16 @@ console.log(a)//undefined
 1.变量提升
 函数有特殊性：在老版本游览器中，确实不论条件是否成立，都会进行变量提升和定义，但是在新版本游览器中为了兼容ES6严谨的语法规范，条件中的函数只会提升不会定义。
 */
-console.log(fn);//undefined
-fn()//Uncaught typeError:fn is ont a function
-if('fn' in  window) {//true
+console.log(fn1);//undefined
+fn1()//Uncaught typeError:fn is ont a function
+if('fn1' in  window) {//true
     // 条件成立，进来后的第一件事是给 FN赋值
-    fn()
-    function fn() {
+    fn1()
+    function fn1() {
         console.log('哈哈哈')
     }
 }
-fn()
+fn1()
 
 /*
 自执行函数：前面加的()或者!、-、~、+只有一个目的，让语法符合而已
@@ -186,3 +186,39 @@ g= function () {return false}
 }()
 console.log(f())
 console.log(g())
+
+/*
+练习题11
+*/
+console.log(q,w)
+var q =12,b=12;
+function fn2() {
+    console.log(q,w)
+    var q=w=12
+    console.log(q,w)
+}
+console.log(q,w)
+/*
+练习题112
+*/
+function sum(a) {
+    console.log(a)
+    let a =100;//报错，a 已经存在了 形参就是一个私有变量。
+}
+sum(200)
+
+/*
+练习题13
+*/
+console.log(a,b,c)
+var a =12,
+    b =13,
+    c =14;
+function fn3(a) {
+    console.log(a,b,c)
+    a=100;
+    c=200;
+    console.log(a,b,c)
+}
+b=fn(10)
+console.log(a,b,c)

@@ -7,6 +7,9 @@
 var b = 14 //变量 在全局下声明的变量也相当于在window添加了一个对应的属性
 console.log(b)//14
 console.log(window.b)//14//window.a =14 window的一个属性
+var d=13,f=14;等价于var d=13;var f=14;
+var d=f=10 等价于var d=10; f=10;(f不带var)
+
 *带function的不仅声明，而且还定义了(defined定义) "a=13"定义就是赋值，准确来说就是让变了和每个值进行关联
 
 
