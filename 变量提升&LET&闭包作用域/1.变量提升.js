@@ -191,7 +191,7 @@ console.log(g())
 练习题11
 */
 console.log(q,w)
-var q =12,b=12;
+var q =12,w=12;
 function fn2() {
     console.log(q,w)
     var q=w=12
@@ -201,6 +201,7 @@ console.log(q,w)
 /*
 练习题112
 */
+console.log(sum(200))
 function sum(a) {
     console.log(a)
     let a =100;//报错，a 已经存在了 形参就是一个私有变量。
@@ -210,15 +211,98 @@ sum(200)
 /*
 练习题13
 */
-console.log(a,b,c)
-var a =12,
-    b =13,
-    c =14;
-function fn3(a) {
-    console.log(a,b,c)
-    a=100;
-    c=200;
-    console.log(a,b,c)
+console.log(e,r,t)
+var e =12,
+    r =13,
+    t =14;
+function fn3(e) {
+    console.log(e,r,t)
+    e=100;
+    t=200;
+    console.log(e,r,t)
 }
-b=fn(10)
-console.log(a,b,c)
+r=fn(10)
+console.log(e,r,t)
+/*
+练习题14
+*/
+var arr = [12,23]
+function fn4(arr) {
+    console.log(arr)
+    arr[0]=100
+    arr = [100]
+    arr[0] =0;
+    console.log(arr)
+}
+fn4(arr)
+console.log(arr)
+/*
+练习题15
+*/
+var y =10
+function A() {
+    var y =10
+    //函数X是在A的私有作用域种创建的。函数的作用域不是在调用的时候决定的而是在定义的时候决定的。
+    function x(){
+        console.log(y)
+    }
+    return x;
+}
+var u = A()//u=>x()
+u()
+function B() {
+    var y =20
+    u()//函数的作用域在定义的时候 就决定了，所以这里并不会找这里的y=20
+}
+B()
+//10 10
+
+/*
+练习题16
+*/
+var i =1;
+function fn5() {
+    var i =2;
+    function f() {
+        i--
+        console.log(i)
+    }
+    fn()
+    return f;
+}
+var o =fn5()
+o()
+console.log(i)
+
+/*
+练习题17
+*/
+var i = 5
+function fn(i) {
+    return function(n) {
+        console.log(n+(++i))
+    }
+}
+var f =fn(1) 
+f(2)
+fn(3)(4)
+fn(5)(6)
+f(7)
+console.log(i)
+/*
+练习题17
+*/
+var i=20
+function fn() {
+    i-=2
+    return function(n) {
+        console.log((++i)-n)
+    }
+}
+var f = fn()
+f(1)
+f(2)
+fn()(3)//先执行大函数f再执行大函数里的里的小函数n=3
+fn()(4)
+f(5)
+console.log(i)
