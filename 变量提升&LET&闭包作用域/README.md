@@ -22,7 +22,9 @@ console.log(a)
 
 
 2.let/const 和var到区别
+
 2.1 1et/const 不存在变了提升。创建变了的6种方式种只有var和function有变量提升，而let/const/import/class都不存在这个机制。
+
 2.2在相同的作用域中or执行上下文中,var/function允许重复声明，声明第一次之后，之后再遇到就不会在重复声明了，而let/const是不允许的。
 //在游览器自上而下执行之前，在执行之前还有其他操作，比如词法解析它会检测即将执行的代码是否存在语法错误，存在就报错SyntaxError，所以下面的案例直接报错了，代码不会执行。
 console.log(1)//不执行
@@ -30,12 +32,27 @@ let j =12
 console.log(j)
 let j = 13 
 console.log(j)
+
 2.3 let能解决typeof检测时存在的暂时性死区
 console.log(a) //报错a未定义
 console.log(typeof a) //undefined 这是游览器的BUG，本应该是报错的，因为没有a(暂时性死区)
-
 console.log(typeof a)//a未初始化
 let a 
+
+2.4基于let/const/class等创建变了，会把所在的大括号（除对象的大括号之外）当做一个全新的私有块级作用域。
+函数执行会产生私有作用域
+let等也会产生私有的作用域(var不会)
+if(1===1) {
+    var a =10
+}
+console.log(a)//10 a是全局作用域
+if(1===1) {
+    //=>let会有块作用域(现在大括号是就是一个私有作用域)
+    //=>a是私有变量
+    let a =10
+}
+console.log(a)//报错，请先定义a
+
 
 3.闭包作用域
 3.1创建函数开辟一个堆内存把函数体重大代码当做字符串存储进去
@@ -84,7 +101,59 @@ let a
     3.7.1保护（私有变量和外界没有必然的练习）
     jquery前端非常经典类库：提供了大量的方法供开发人员使用
     为了防止全局变量污染（导入JQ后，它里面有大量的方法,如果这些方法不保护起来，用户填写的方法很容易和JQ方法名字相同产生冲突，产生冲突可以理解为全局变量污染）JQ的方法和变量需要用闭包保护起来。
+    在真是项目中，我们一般都要把自己写的内容放到一个闭包中，这样可以有效防止自己的代码和别人代码产生冲突（全局变量污染：真是项目中是要尽可能减少对全局变量的使用的）；如果需要把自己的东西给别人用，基于return和window.xxx等方式暴露给别人即可。
+    //JS
+    var xxx = (function(){
+        //...A写的代码
+        return xxx;
+    })()
+    (function(){
+        //...b写的代码
+        window.xxx= xxx;
+    })()
+    //JQ
+    $(function(){
+        //这样写在某些角度上也是为了减少全局变量
+    })
+    *在真是项目中应该减少堆闭包的使用（因为闭包会产生不释放的栈内存，过多的使用容易导致内存溢出或性能降低，如果需要使用闭包建议只使用一个闭包）
     3.7.2保存(性不销毁的栈内存，里面的私有变量信息保存下来了)
    
+this
+函数执行的主体（不是上下文）：谁把函数执行的，那么执行主体就是谁
+1.给元素的某个事件绑定方法,当事件触发方法执行的时候，方法中的this是当前元素操作的元素本身。
+2.如果确定执行主体(this)是的？当方法执行的时候，我们看方法是否有点（.），没有是window或
+undefined,有点前面this是谁就是谁。
+var name ='珠峰培训'
+function fn(){
+    console.log(this.name)
+}
+var obj = {
+    name:'你好世界',
+    fn:fn
+}
+obj.fn()//=>this:obj
+fn()//=>this:window(非严格模式。严格模式下是undefined)window.省略了
+(function(){
+//自执行函数中的this是window或undefine
+})()
+思考？
+//hasOwnProperty方法中的this:ary.__proto__.__proto__.
+ary.__proto__.__proto__.hasOwnProperty()
+let obj = {
+    fn:(function(n){
+        //把自执行函数执行的返回结果赋值给fn
+        //this:window
+        return function() {
+            //=>fn等于这个返回的小函数 this:obj
+        }
+    })(10)
+}
+obj.fn()
 
-
+function fn(){
+    console.log(this)//this:window
+}
+document.body.onclick=function() {
+    fn()//this:body
+}
+*this跟上下文没有任何关系，这就是this让人迷惑的地方。
