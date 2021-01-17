@@ -306,3 +306,52 @@ fn()(3)//先执行大函数f再执行大函数里的里的小函数n=3
 fn()(4)
 f(5)
 console.log(i)
+/*
+练习题18
+*/
+function fn(i) {
+    return function(n) {//闭包不销毁，私有作用域的变量会被存储在内存中
+        console.log(n+(i++))//(i++)有小括号也不会先执行i++还是n+i++
+    }
+}
+var f = fn(10)//这里的10会常驻内存中
+f(20)
+fn(20)(40)
+fn(30)(50)
+f(30)
+/*
+练习题19
+*/
+var i =10
+fucntion fn() {
+    return function(n) {
+        console.log(n+(++i))
+    }
+}
+var f =fn()
+f(20)
+fn()(20)
+fn()(30)
+f(30)
+/*
+练习题20
+*/
+var ary =[1,2,3,4]
+function fn(ary) {
+    ary[0]=0
+    ary=[0]
+    ary=[0]=100
+    return ary
+}
+var res = fn(ary)
+console.log(ary)
+console.log(res)
+/*
+练习题21
+*/
+var test = (function(i){
+    return function(){
+        alert(i*=4)//alert输出为字符串
+    }
+}(2))
+test(5)
