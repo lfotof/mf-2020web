@@ -54,7 +54,7 @@ if(1===1) {
 console.log(a)//报错，请先定义a
 *在当前作用域下（全局、私有、块作用域）如果创建变量使用的是let/const等，一定不能在创建代码的前面是有这些变量，否则会报错：ReferenceError: Cannot access 'a' before initialization
 
-3.闭包作用域
+3.闭包作用域*作用域只能是栈
 3.1创建函数开辟一个堆内存把函数体重大代码当做字符串存储进去
 3.2把堆内存的地址赋值给函数名/变量名
 3.3函数在哪里定义的，那么它执行的时候所需要查找的上级作用域就是谁
@@ -157,6 +157,7 @@ function fn(){
 document.body.onclick=function() {
     fn()//this:body
 }
+3.在构造函数模式执行中，函数体重的this是当前类的实例
 *this跟上下文没有任何关系，这就是this让人迷惑的地方。
 
 函数小知识点：
@@ -225,3 +226,4 @@ function fn(x,cb) {
 fn();//有形参无实参,形参默认为undefined
 fn(10)
 fn(10,function(){})
+
