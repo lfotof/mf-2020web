@@ -20,4 +20,16 @@
         <script src="" async defer></script>
     </body>
 </html>
-<script src="1.变量提升.js"></script>
+<script>
+    f = function () {return true;}
+g = function () {return false;}
+~function () {
+    if (g() && [] == ![]) {
+        f = function () {return false;}
+        function g() {return true;}
+    }
+}();
+console.log(f());
+console.log(g());
+</script>
+<!-- <script src="1.变量提升.js"></script> -->

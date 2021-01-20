@@ -135,7 +135,7 @@ var obj = {
 obj.fn()//=>this:obj
 fn()//=>this:window(非严格模式。严格模式下是undefined)window.省略了
 (function(){
-//自执行函数中的this是window或undefine
+//全局作用域自执行函数中的this是window严格模式是undefine
 })()
 思考？
 //hasOwnProperty方法中的this:ary.__proto__.__proto__.
@@ -210,7 +210,7 @@ b(1,2,3)
 
 * 逻辑或 || 和逻辑与&& 在赋值操作的意义
 A||b :先验证A的真假，如果A为真返回A的值，A为假返回的是B的值
-A&&b :A为真返回B值,A为假返回B的值
+A&&b :A为真返回B值,A为假返回A的值
 &&的优先级高于 ||
 let a = 0 || false //false
 a = 1 || false //1
