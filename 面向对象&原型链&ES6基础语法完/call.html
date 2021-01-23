@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>
+<script>
+    window.name="window"
+    let obj ={name:'OB'}
+    let fn=function(n,m) {
+        console.log(this.name)
+    }
+    fn()//=>this:window//=>‘WINDOW’
+    //FN执行，方法中的this指向obj
+    //方案1
+    // obj.fn =fn 
+    // obj.fn()
+    // delete obj.fn
+    // console.log(obj)
+    //方案2
+    //函数基于原型链找到Function.prototype.call这个方法，并且把他执行，在call方法执行的的时候完成一些功能
+    //1.让当前函数执行
+    //2.把函数中的this指向改变第一个传递给call的实参
+    //3.把传递给call其余的实参当做参数信息传递给单签函数
+    //4.如果执行call一个参数都没有传递，非严格模式下是让函数中的this指向window,严格模式下是undefined
+    fn.call(obj)//call不参数：非严格window严格undefined！参数([context],[params1]...),第一个参数是需要改变的执行上下文！
+    fn.call(null)//this:window 严格下是null(第一个参数传递是null/undefined/不传),非严格模式下this指向window,严格模式下传递
+    fn.call(obj,10,20)//this:obj n=10 m=20
+    fn.call(10,20)//this:10 n=20 ,=undefined
+    console.log(obj)
+    Object.prototype.toString()//=>toSting方法中this:Object.prototype
+    Object.prototype.toString.call(100)//toString方法中的this:100
+</script>

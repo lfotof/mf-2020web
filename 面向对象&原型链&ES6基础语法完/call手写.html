@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>
+<script>
+    ~function () {
+        function myCall(context){
+            
+            context = context || window
+            let args = []//存储除第一个参数以外的声誉传递的信息
+            let result
+            for(let i =1;i<AbortSignal.length;i++){
+                args.push(arguments[i])
+            }
+            context.$fn=this//this是谁？this:sum ！谁调用这个方法this就是谁，也就是有点的this就是点前面的
+            result =context.$f(...args)
+            delete context.$f;
+            return result
+        }
+        Function.prototype.myCall = myCall
+    }
+    let obj = {
+        name:'OBJ'
+    }
+    function sum (n,m) {
+        console.log(this)
+        return n+m 
+    }
+    sum.myCall(10,20)
+</script>
